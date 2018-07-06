@@ -8,17 +8,14 @@ html
     meta http-equiv="cleartype" content="on"
     meta name="HandheldFriendly" content="True"
     meta name="MobileOptimized" content="320"
-    - if content_for?(:title)
-      = yield(:title)
-    - else
-      title investing_mistakes
+    title = content_for?(:title) ? format('%s - 投资错题本', yield(:title)) : '投资错题本'
     = csrf_meta_tags
     = action_cable_meta_tag
     = content_for?(:head) ? yield(:head) : ''
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag "favicon.ico"
-  body
+  body class=body_class
     main
-      .container
+      .page-content-wrapper
         == yield

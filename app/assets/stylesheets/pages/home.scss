@@ -1,0 +1,14 @@
+#login-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .login-section {
+    .slogan {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    margin: auto;
+    text-align: center;
+  }
+}
