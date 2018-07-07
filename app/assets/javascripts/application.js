@@ -16,4 +16,10 @@
 //= require bootstrap-sprockets
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+//= require_self
+
+//= require_tree ./pages
+
+(function() {
+  this.App || (this.App = {});
+}).call(this);

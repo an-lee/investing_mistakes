@@ -1,9 +1,32 @@
-#login-section {
+#welcome-section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 
-  .login-section {
+  .user-profile {
+    margin: auto;
+    text-align: center;
+
+    .user-avatar {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    .user-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #555555;
+    }
+  }
+
+  .login-area {
     .slogan {
       font-size: 36px;
       margin-bottom: 20px;
