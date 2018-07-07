@@ -12,27 +12,30 @@
 
   .post-card {
     margin-bottom: 30px;
-    
+
     .post-header {
-      display: flex;
-      align-items: flex-end;
       background-color: #fff;
 
-      .post-author-name {
-      }
+      .post-author {
+        display: flex;
+        align-items: flex-end;
 
-      .post-author-avatar {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin-right: 10px;
+        &-name {
+          flex: 1;
+        }
+
+        &-avatar {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
       }
 
       .post-created-at {
         text-align: right;
-        font-size: 14px;
+        font-size: 12px;
         color: #CCCCCC;
-        flex: 1;
       }
     }
 
@@ -71,6 +74,7 @@
     right: 30px;
     display: flex;
     align-items: center;
+    z-index: 100;
   }
 
   .new-btn {

@@ -8,8 +8,12 @@
     - @posts.each do |post|
       .post-card.card
         .card-header.post-header
-          = image_tag post.author.avatar_url, class: 'post-author-avatar'
-          .post-author-name = post.author.name
+          .post-author
+            - if post.author.avatar_url.present?
+              = image_tag post.author.avatar_url, class: 'post-author-avatar'
+            - else
+              = image_tag 'default-user.png', class: 'post-author-avatar'
+            .post-author-name = post.author.name
           .post-created-at = display_datetime(post.created_at)
         .card-body.post-body
           .card-title 本应...
