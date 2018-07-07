@@ -1,0 +1,23 @@
+.page-container.container
+  .page-tool-line.d-none.d-sm-block
+    = link_to '记错题', new_post_path, class: 'btn btn-primary'
+  .floating-btn.d-md-none
+    = link_to '+', new_post_path, class: 'btn btn-primary new-btn'
+
+  .post-list
+    - @posts.each do |post|
+      .post-card.card
+        .card-header.post-header
+          = image_tag post.author.avatar_url, class: 'post-author-avatar'
+          .post-author-name = post.author.name
+          .post-created-at = display_datetime(post.created_at)
+        .card-body.post-body
+          .card-title 本应...
+          .card-text = post.should
+          .card-title 但是...
+          .card-text = post.but
+          .card-title 结果...
+          .card-text = post.result
+        - if post.author == current_user
+          .card-footer.post-footer
+            = link_to '编辑', edit_post_path(post), class: 'post-action post-action-edit'

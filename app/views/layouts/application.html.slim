@@ -17,5 +17,7 @@ html
     = favicon_link_tag "favicon.ico"
   body class=body_class
     main
+      = render 'shared/header'
       .page-content-wrapper
         == yield
+      = render 'shared/footer'

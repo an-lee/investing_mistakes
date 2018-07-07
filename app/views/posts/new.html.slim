@@ -1,0 +1,10 @@
+.page-container.container
+  .page-head
+    | 你记下的第
+    span.mistakes-count.badge.badge-pill.badge-warning = @posts_count
+    | 次投资错误
+  = simple_form_for @post do |f|
+    = f.input :should, placeholder: '本应这样做……'
+    = f.input :but, placeholder: '但是却那样做……'
+    = f.input :result, placeholder: '结果就变成……'
+    = f.button :submit, class: 'btn btn-primary'

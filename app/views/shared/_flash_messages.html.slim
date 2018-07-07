@@ -1,0 +1,6 @@
+- flash.each do |key, value|
+  - if flash_class(key)
+    = content_tag :div, class: flash_class(key) do
+      button.close[type="button" data-dismiss="alert"]
+        | ×
+      = value

@@ -1,0 +1,11 @@
+zh-CN:
+  activerecord:
+    models:
+      administrator: 管理员
+      user: 用户
+      post: 错题
+    attributes:
+      post:
+        should: 本应
+        but: 但是
+        result: 结果

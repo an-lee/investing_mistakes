@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_06_164337) do
+ActiveRecord::Schema.define(version: 2018_07_07_095046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 2018_07_06_164337) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "posts", comment: "帖子", force: :cascade do |t|
+    t.bigint "author_id", comment: "作者"
+    t.text "should", comment: "本应"
+    t.text "but", comment: "但是"
+    t.text "result", comment: "结果"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "uid", comment: "mixin 的 user_id"
     t.json "raw", comment: "mixin 返回的原始数据"
@@ -44,4 +54,5 @@ ActiveRecord::Schema.define(version: 2018_07_06_164337) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "posts", "users", column: "author_id"
 end
