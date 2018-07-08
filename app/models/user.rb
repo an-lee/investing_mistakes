@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :posts, foreign_key: :author_id
   has_many :payments, foreign_key: 'payer_id'
   has_many :receivables, class_name: 'Payment', foreign_key: 'recipient_id'
+  has_many :comments, foreign_key: :commenter_id
 
   validates :uid, presence: true, uniqueness: true
 

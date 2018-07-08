@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :payments, only: [:new, :create], controller: :post_payments
+    resources :comments, only: [:new, :create, :edit, :update]
   end
 
   resource :payment_state, only: [:show]

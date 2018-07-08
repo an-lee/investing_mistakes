@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_08_021625) do
+ActiveRecord::Schema.define(version: 2018_07_08_211511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,20 @@ ActiveRecord::Schema.define(version: 2018_07_08_021625) do
     t.index ["owner_id"], name: "index_assets_on_owner_id"
   end
 
+  create_table "comments", comment: "评论", force: :cascade do |t|
+    t.bigint "commenter_id", comment: "评论者"
+    t.string "commentable_type"
+    t.bigint "commentable_id", comment: "评论对象"
+    t.text "content", comment: "内容"
+    t.string "ancestry"
+    t.datetime "soft_deleted_at", comment: "删除时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_comments_on_ancestry"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["commenter_id"], name: "index_comments_on_commenter_id"
+  end
+
   create_table "payments", comment: "支付", force: :cascade do |t|
     t.bigint "payer_id", comment: "支付人"
     t.bigint "recipient_id", comment: "收款人"
@@ -94,6 +108,7 @@ ActiveRecord::Schema.define(version: 2018_07_08_021625) do
   end
 
   add_foreign_key "assets", "users", column: "owner_id"
+  add_foreign_key "comments", "users", column: "commenter_id"
   add_foreign_key "payments", "users", column: "payer_id"
   add_foreign_key "payments", "users", column: "recipient_id"
   add_foreign_key "posts", "users", column: "author_id"

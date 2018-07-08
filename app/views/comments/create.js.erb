@@ -1,0 +1,2 @@
+$('#<%= format("post-card-%s", @post.id) %> .comment-form textarea').val('');
+$('#<%= format("post-card-%s", @post.id) %> .comment-list').prepend("<%=j render 'comments/comment_card', comment: @comment%>")

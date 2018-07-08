@@ -31,6 +31,7 @@ class Post < ApplicationRecord
 
   has_many :receivables, -> { where(state: :completed).order(created_at: :desc) }, class_name: 'Payment'
   has_many :payers, through: :receivables
+  has_many :comments, as: :commentable
 
   validates :should, presence: true
   validates :but, presence: true

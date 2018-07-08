@@ -51,6 +51,9 @@ gem 'mina-logs', '~> 1.1.0', require: false
 gem 'http'
 gem 'rest-client'
 
+# ancestry
+gem 'ancestry'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'

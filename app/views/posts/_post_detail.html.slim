@@ -28,8 +28,5 @@
           = f.submit '评论', class: 'btn btn-sm btn-primary'
       end
     .comment-list
-      - post.comments.order_desc.limit(5).each do |comment|
+      - post.comments.order_desc.each do |comment|
         = render 'comments/comment_card', comment: comment
-      - if post.comments.count > 5
-        .comment-more
-          = link_to '查看更多', post_path(post)
