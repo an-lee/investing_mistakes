@@ -40,6 +40,8 @@ class Payment < ApplicationRecord
 
   validates :amount, numericality: { greater_than: 0 }
 
+  before_validation :setup_memo
+
   asset_methods :amount
 
   aasm column: :state, requires_lock: true do
@@ -57,6 +59,14 @@ class Payment < ApplicationRecord
   end
 
   private
+
+  def setup_memo
+    if self.memo.blank?
+      self.memo = '牛逼，继续吹啊（来自投资错题本鼓励金）'
+    else
+      self.memo = memo + '（来自投资错题本鼓励金）'
+    end
+  end
 
   def touch_processing_started_at
     touch(:processing_started_at)
