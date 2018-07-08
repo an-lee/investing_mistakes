@@ -2,7 +2,7 @@ class PostPaymentsController < ApplicationController
   before_action :load_post
 
   def new
-    @payment = @post.receivables.new(recipient: @post.author)
+    @payment = @post.receivables.new(recipient: @post.author, amount: 100)
   end
 
   def create
@@ -30,6 +30,6 @@ class PostPaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:asset_id, :amount, :memo)
+    params.require(:payment).permit(:asset_id, :amount, :memo).merge(asset_id: Post::AVAILABLE_PAYMENT.fetch(:asset_id))
   end
 end
