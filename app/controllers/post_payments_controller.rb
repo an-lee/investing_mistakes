@@ -10,7 +10,7 @@ class PostPaymentsController < ApplicationController
     @payment.recipient = @post.author
     @payment.payer = current_user
     if @payment.save
-      path = CreateMixinPaymentPathService.new.call(
+      @path = CreateMixinPaymentPathService.new.call(
         recipient: @payment.recipient.uid,
         asset: @payment.asset_id,
         amount: @payment.amount,
@@ -19,7 +19,6 @@ class PostPaymentsController < ApplicationController
       )
 
       @payment.started_processing_payment!
-      redirect_to path
     end
   end
 
