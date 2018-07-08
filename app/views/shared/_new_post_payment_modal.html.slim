@@ -14,6 +14,6 @@
         = bootstrap_form_for payment, url: post_payments_path(post), remote: true do |f|
           = f.hidden_field :trace
           = f.number_field :amount, label: '数量', step: :any
-          = f.text_field :memo, label: '留言', placeholder: '牛逼，你继续吹啊'
+          = f.text_field :memo, label: '留言', placeholder: '牛逼，继续吹啊'
           = f.submit '支付', class: 'btn btn-primary payment-confirm-btn'
       .modal-footer
