@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   helper_method :current_user
+  helper_method :browser_mobile
 
   private
 
@@ -22,5 +23,9 @@ class ApplicationController < ActionController::Base
   def user_sign_out
     session[:current_user_id] = nil
     @current_user = nil
+  end
+
+  def browser_mobile
+    browser.device.mobile?
   end
 end
