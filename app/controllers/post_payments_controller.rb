@@ -17,8 +17,12 @@ class PostPaymentsController < ApplicationController
         trace: @payment.trace,
         memo: @payment.memo,
       )
-
       @payment.started_processing_payment!
+      if browser.device.mobile?
+        redirect_to @path
+      else
+        render 'create'
+      end
     end
   end
 
