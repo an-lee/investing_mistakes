@@ -7,9 +7,15 @@ module MixinAPI
         @client = Client.new
       end
 
-      def pay(payment)
-        path = format('pay?recipient=%s&asset=%s&amount=%s&trace=%s&memo=%s', payment.recipient.uid, payment.asset_id, payment.amount, payment.trace, payment.memo)
-        client.get(path)
+      def verify(payment)
+        path = 'payments'
+        payload = {
+          asset_id: payment.asset_id,
+          opponent_id: payment.recipient.uid,
+          amount: payment.amount,
+          trace_id: payment.trace,
+        }
+        client.post(path, json: payload)
       end
     end
   end
