@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     code = params[:code]
     user = User.auth_from_mixin(code)
     user_sign_in(user) if user
-    
+
     redirect_to posts_path
   end
 
