@@ -7,14 +7,14 @@ module Tracable
     before_validation :setup_trace, on: :create
   end
 
-  private
-
   def setup_trace
-    loop do
-      candidate = SecureRandom.uuid
-      unless self.class.exists?(trace: candidate)
-        self.trace = candidate
-        break
+    if self.trace.nil?
+      loop do
+        candidate = SecureRandom.uuid
+        unless self.class.exists?(trace: candidate)
+          self.trace = candidate
+          break
+        end
       end
     end
   end
