@@ -46,15 +46,33 @@
         color: #555555;
         font-size: 14px;
       }
+
       .card-text {
         margin-bottom: 20px;
         color: #353535;
         font-size: 16px;
       }
+
       .post-action {
         text-align: center;
+        margin-bottom: 10px;
 
         .pay-btn {
+        }
+      }
+
+      .post-payers {
+        margin: auto;
+        max-width: 500px;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        overflow: scroll;
+
+        img {
+          width: 30px;
+          height: 30px;
+          margin: 5px;
         }
       }
     }
@@ -69,6 +87,8 @@
         flex: 1;
         text-align: center;
       }
+
+
     }
   }
 
@@ -91,6 +111,7 @@
     font-size: 40px;
     line-height: 1;
     padding: 0;
+    opacity: 0.7;
   }
 }
 

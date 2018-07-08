@@ -12,6 +12,7 @@ class PostPaymentsController < ApplicationController
 
   def create
     @payment = current_user.payments.new(payment_params)
+    @payment.post = @post
     @payment.recipient = @post.author
     @payment.payer = current_user
 
@@ -40,6 +41,6 @@ class PostPaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:asset_id, :amount, :memo, :trace).merge(asset_id: Post::AVAILABLE_PAYMENT.fetch(:asset_id), recipient: @post.author)
+    params.require(:payment).permit(:asset_id, :trace, :amount, :memo)
   end
 end

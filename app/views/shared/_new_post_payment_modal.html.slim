@@ -12,6 +12,7 @@
         .asset-symbol = Post::AVAILABLE_PAYMENT.fetch(:symbol)
         .asset-name = Post::AVAILABLE_PAYMENT.fetch(:name)
         = bootstrap_form_for payment, url: post_payments_path(post), remote: true do |f|
+          = f.hidden_field :asset_id
           = f.hidden_field :trace
           = f.number_field :amount, label: '数量', step: :any
           = f.text_field :memo, label: '留言', placeholder: '牛逼，继续吹啊'

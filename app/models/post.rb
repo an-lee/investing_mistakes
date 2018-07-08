@@ -29,7 +29,8 @@ class Post < ApplicationRecord
 
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
 
-  has_many :receivables, class_name: 'Payment'
+  has_many :receivables, -> { where(state: :completed).order(created_at: :desc) }, class_name: 'Payment'
+  has_many :payers, through: :receivables
 
   validates :should, presence: true
   validates :but, presence: true

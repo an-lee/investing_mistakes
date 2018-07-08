@@ -5,7 +5,7 @@ class PaymentStatesController < ApplicationController
     return if @payment.blank?
 
     r = MixinAPI::api_payment.verify(@payment)
-    Rails.logger.info r
+    
     if r['data'].fetch('status') == 'paid'
       @payment.complete!
       render plain: 'paid'

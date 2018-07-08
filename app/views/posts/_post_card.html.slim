@@ -17,6 +17,9 @@
     .post-action
       = link_to new_post_payment_path(post), remote: true, class: 'btn btn-sm btn-outline-danger pay-btn' do
         | 鼓励一下
+    .post-payers
+      - post.payers.limit(20).each do |payer|
+        = image_tag payer.avatar_url
 
   - if post.author == current_user
     .card-footer.post-footer
