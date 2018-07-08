@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_095046) do
+ActiveRecord::Schema.define(version: 2018_07_08_014713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,26 @@ ActiveRecord::Schema.define(version: 2018_07_07_095046) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "assets", comment: "虚拟资产", force: :cascade do |t|
+    t.bigint "owner_id", comment: "所有者"
+    t.string "uuid", comment: "Mixin网络中的唯一标识"
+    t.string "chain_id", comment: "链ID"
+    t.string "symbol", comment: "简称"
+    t.string "name", comment: "全称"
+    t.string "icon_url", comment: "图标链接"
+    t.string "balance", comment: "余额"
+    t.string "public_key", comment: "公钥"
+    t.string "price_btc", comment: "单价，以 BTC 计价"
+    t.string "price_usd", comment: "单价，以  USD 计价"
+    t.string "change_btc", comment: "以 BTC 计价变动"
+    t.string "change_usd", comment: "以 USD 计价变动"
+    t.string "asset_key"
+    t.string "confirmations", comment: "确认数"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_assets_on_owner_id"
+  end
+
   create_table "posts", comment: "帖子", force: :cascade do |t|
     t.bigint "author_id", comment: "作者"
     t.text "should", comment: "本应"
@@ -54,5 +74,6 @@ ActiveRecord::Schema.define(version: 2018_07_07_095046) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "assets", "users", column: "owner_id"
   add_foreign_key "posts", "users", column: "author_id"
 end

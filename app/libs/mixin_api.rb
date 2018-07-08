@@ -1,5 +1,5 @@
 module MixinAPI
-  def self.api_profile
-    @api_profile ||= MixinAPI::API::Profile.new
+  def self.api_user
+    @api_user ||= MixinAPI::API::User.new
   end
 end

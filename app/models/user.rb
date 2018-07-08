@@ -14,6 +14,9 @@
 #
 
 class User < ApplicationRecord
+  include Authenticatable
+
+  has_many :assets, foreign_key: :owner_id
   has_many :posts, foreign_key: :author_id
 
   validates :uid, presence: true, uniqueness: true

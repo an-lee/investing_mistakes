@@ -88,7 +88,7 @@ module MixinAPI
         end
 
         begin
-          file = Tempfile.new(['wxapi-file-', extension])
+          file = Tempfile.new(['mixin-file-', extension])
           file.binmode
           file.write(response.body)
         ensure
