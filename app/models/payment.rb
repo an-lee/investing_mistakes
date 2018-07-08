@@ -62,7 +62,7 @@ class Payment < ApplicationRecord
 
   def setup_memo
     if self.memo.blank?
-      self.memo = '牛逼，继续吹啊（来自投资错题本鼓励金）'
+      self.memo = '憋伤心，至少还有吹牛币（来自投资错题本鼓励金）'
     else
       self.memo = memo + '（来自投资错题本鼓励金）'
     end
