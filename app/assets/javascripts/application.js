@@ -18,6 +18,7 @@
 //= require turbolinks
 //= require_self
 
+//= require_tree ./components
 //= require_tree ./pages
 
 (function() {

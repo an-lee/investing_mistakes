@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create], controller: :post_payments
   end
 
-  resources :payment_callbacks, only: [:index]
+  resource :payment_state, only: [:show]
 
   mount Sidekiq::Web => '/sidekiq'
   mount StatusPage::Engine => '/'

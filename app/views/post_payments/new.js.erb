@@ -1,2 +1,6 @@
-$('#modal-window').html("<%= j render 'shared/new_post_payment_modal', post: @post %>")
-$('#modal-window .modal').modal()
+$('#modal-window').html("<%= j render 'shared/new_post_payment_modal', payment: @payment, post: @post %>");
+$('#modal-window .modal').modal();
+
+$('.payment-confirm-btn').on('click', function() {
+  App.paymentModal.startPollingPaymentState();
+})

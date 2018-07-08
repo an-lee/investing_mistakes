@@ -1,4 +1,4 @@
-.modal.new-post-payment-modal.fade id="new-post-payment-modal" tabindex="-1" role="dialog" aria-labelledby="new-post-payment-modal-label" aria-hidden="true"
+.modal.new-post-payment-modal.fade id="new-post-payment-modal" tabindex="-1" role="dialog" aria-labelledby="new-post-payment-modal-label" aria-hidden="true" data-payment-trace=payment.trace data-post-id=post.id
   .modal-dialog role="document"
     .modal-content
       .modal-header
@@ -11,8 +11,9 @@
         .asset-icon = image_tag Post::AVAILABLE_PAYMENT.fetch(:icon_url)
         .asset-symbol = Post::AVAILABLE_PAYMENT.fetch(:symbol)
         .asset-name = Post::AVAILABLE_PAYMENT.fetch(:name)
-        = bootstrap_form_for @payment, url: post_payments_path(@post), remote: true do |f|
+        = bootstrap_form_for payment, url: post_payments_path(post), remote: true do |f|
+          = f.hidden_field :trace
           = f.number_field :amount, label: '数量', step: :any
           = f.text_field :memo, label: '留言', placeholder: '牛逼，你继续吹啊'
-          = f.submit '支付', class: 'btn btn-primary text-center'
+          = f.submit '支付', class: 'btn btn-primary payment-confirm-btn'
       .modal-footer
