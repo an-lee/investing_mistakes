@@ -1,4 +1,4 @@
 zh-CN:
   time:
     formats:
-      default: '%Y年%m月%d日 %H:%M'
+      default: '%Y-%m-%d %H:%M'

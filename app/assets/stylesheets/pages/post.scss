@@ -15,11 +15,10 @@
 
     .post-header {
       background-color: #fff;
+      display: flex;
+      align-items: flex-end;
 
       .post-author {
-        display: flex;
-        align-items: flex-end;
-
         &-name {
           flex: 1;
         }

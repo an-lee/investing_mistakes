@@ -17,6 +17,6 @@ header
           - if current_user
             li.nav-item.dropdown
               a.nav-link.dropdown-toggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-                = image_tag current_user.avatar_url, class: 'user-avatar'
+                = image_tag display_avatar_url(current_user), class: 'user-avatar'
               div.dropdown-menu aria-labelledby="navbarDropdown"
                 = link_to '登出', logout_path, method: :delete, class: 'dropdown-item'

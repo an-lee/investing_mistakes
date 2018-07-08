@@ -7,3 +7,5 @@
   .post-list
     - @posts.each do |post|
       = render 'post_card', post: post
+
+  = render 'shared/list_pagination', records_count: @posts_count, records: @posts

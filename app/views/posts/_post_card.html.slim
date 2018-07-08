@@ -1,12 +1,8 @@
 .post-card.card
   .card-header.post-header
-    .post-author
-      - if post.author.avatar_url.present?
-        = image_tag post.author.avatar_url, class: 'post-author-avatar'
-      - else
-        = image_tag 'default-user.png', class: 'post-author-avatar'
-      .post-author-name = post.author.name
-    .post-created-at = display_datetime(post.created_at)
+    = image_tag display_avatar_url(post.author), class: 'post-author-avatar'
+    .post-author-name = post.author.name
+    .post-created-at = time_ago_in_words(post.created_at)
   .card-body.post-body
     .card-title 本应...
     .card-text = post.should
@@ -19,7 +15,7 @@
         | 鼓励一下
     .post-payers
       - post.payers.limit(20).each do |payer|
-        = image_tag payer.avatar_url
+        = image_tag display_avatar_url(payer)
 
   - if post.author == current_user
     .card-footer.post-footer
