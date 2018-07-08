@@ -6,27 +6,4 @@
 
   .post-list
     - @posts.each do |post|
-      .post-card.card
-        .card-header.post-header
-          .post-author
-            - if post.author.avatar_url.present?
-              = image_tag post.author.avatar_url, class: 'post-author-avatar'
-            - else
-              = image_tag 'default-user.png', class: 'post-author-avatar'
-            .post-author-name = post.author.name
-          .post-created-at = display_datetime(post.created_at)
-        .card-body.post-body
-          .card-title 本应...
-          .card-text = post.should
-          .card-title 但是...
-          .card-text = post.but
-          .card-title 结果...
-          .card-text = post.result
-
-          .post-action
-            = link_to new_post_payment_path(post), remote: true, class: 'btn pay-btn' do
-              i.fa.fa-thumbs-up
-
-        - if post.author == current_user
-          .card-footer.post-footer
-            = link_to '编辑', edit_post_path(post), class: 'post-action post-action-edit'
+      = render 'post_card', post: post

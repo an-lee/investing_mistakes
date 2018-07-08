@@ -1,4 +1,4 @@
-.posts-index-page {
+.posts-index-page, .posts-show-page {
   .page-container {
     margin-top: 20px;
     position: relative;
@@ -55,14 +55,6 @@
         text-align: center;
 
         .pay-btn {
-          width: 30px;
-          height: 30px;
-          margin: auto;
-          border: 1px solid;
-          border-radius: 50%;
-          color: #E83A2F;
-          line-height: 30px;
-          padding: 0;
         }
       }
     }
