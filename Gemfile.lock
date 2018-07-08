@@ -10,6 +10,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.12.0)
+      concurrent-ruby (~> 1.0)
     actioncable (5.2.0)
       actionpack (= 5.2.0)
       nio4r (~> 2.0)
@@ -66,6 +68,7 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
+    bootstrap_form (2.7.0)
     browser (2.5.3)
     browser_warrior (0.10.0)
       browser
@@ -334,10 +337,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   annotate!
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.0)
+  bootstrap_form
   browser_warrior (>= 0.8.0)
   byebug
   capybara (>= 2.15, < 4.0)

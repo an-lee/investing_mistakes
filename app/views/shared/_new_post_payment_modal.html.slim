@@ -1,0 +1,17 @@
+.modal.fade id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title id="exampleModalLabel"
+          | 鼓励一下
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true"
+            | &times
+      .modal-body
+        = bootstrap_form_for @payment, url: post_payments_path(@post) do |f|
+          = f.form_group :asset_id do
+            - Post::DEFAULT_PAYMENT_OPTIONS.each do |option|
+              = f.radio_button :asset_id, option[:asset_id], label: option[:symbol]
+          = f.number_field :amount, label: '数量'
+          = f.button :submit, label: '支付', class: 'btn btn-primary'
+      .modal-footer

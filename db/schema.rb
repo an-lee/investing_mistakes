@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_08_014713) do
+ActiveRecord::Schema.define(version: 2018_07_08_021625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,25 @@ ActiveRecord::Schema.define(version: 2018_07_08_014713) do
     t.index ["owner_id"], name: "index_assets_on_owner_id"
   end
 
+  create_table "payments", comment: "支付", force: :cascade do |t|
+    t.bigint "payer_id", comment: "支付人"
+    t.bigint "recipient_id", comment: "收款人"
+    t.bigint "post_id", comment: "关联的帖子"
+    t.string "asset_id", comment: "支付币种"
+    t.string "trace", comment: "支付编号"
+    t.string "memo", comment: "备注"
+    t.string "state", comment: "支付状态"
+    t.decimal "amount", comment: "支付总额"
+    t.datetime "processing_started_at", comment: "开始支付时间"
+    t.datetime "completed_at", comment: "支付完成时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payer_id"], name: "index_payments_on_payer_id"
+    t.index ["post_id"], name: "index_payments_on_post_id"
+    t.index ["recipient_id"], name: "index_payments_on_recipient_id"
+    t.index ["trace"], name: "index_payments_on_trace", unique: true
+  end
+
   create_table "posts", comment: "帖子", force: :cascade do |t|
     t.bigint "author_id", comment: "作者"
     t.text "should", comment: "本应"
@@ -75,5 +94,7 @@ ActiveRecord::Schema.define(version: 2018_07_08_014713) do
   end
 
   add_foreign_key "assets", "users", column: "owner_id"
+  add_foreign_key "payments", "users", column: "payer_id"
+  add_foreign_key "payments", "users", column: "recipient_id"
   add_foreign_key "posts", "users", column: "author_id"
 end

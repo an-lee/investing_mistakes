@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   has_many :assets, foreign_key: :owner_id
   has_many :posts, foreign_key: :author_id
+  has_many :payments, foreign_key: 'payer_id'
+  has_many :receivables, class_name: 'Payment', foreign_key: 'recipient_id'
 
   validates :uid, presence: true, uniqueness: true
 

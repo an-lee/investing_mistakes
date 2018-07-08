@@ -24,7 +24,7 @@
           .card-text = post.result
 
           .post-action
-            = link_to '#', class: 'btn pay-btn' do
+            = link_to new_post_payment_path(post), remote: true, class: 'btn pay-btn' do
               i.fa.fa-thumbs-up
 
         - if post.author == current_user

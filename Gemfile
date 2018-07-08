@@ -10,6 +10,7 @@ gem 'rails', '~> 5.2.0'
 gem 'puma', '~> 3.11'
 
 # Database
+gem 'aasm'
 gem 'bcrypt'
 gem 'pg', '0.18'
 gem 'figaro'
@@ -25,6 +26,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.1.0'
 gem 'simple_form', '~> 4.0.0'
+gem 'bootstrap_form'
 gem 'font-awesome-sass'
 gem 'slim-rails'
 gem 'high_voltage', '~> 3.0.0'

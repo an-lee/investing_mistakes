@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   match '/auth/failure', to: 'sessions#failure', via: :get
   delete '/logout', to: 'sessions#destroy', as: :logout
 
-  resources :posts
+  resources :posts do
+    resources :payments, only: [:new, :create], controller: :post_payments
+  end
 
   mount Sidekiq::Web => '/sidekiq'
   mount StatusPage::Engine => '/'
