@@ -22,7 +22,7 @@
 
   .card-footer.post-footer
     .comment-form
-      = link_to '评论', new_post_comment_path(post), remote: true
+      = link_to '评论', post_path(post)
     .comment-list
       - post.comments.order_desc.limit(5).each do |comment|
         = render 'comments/comment_card', comment: comment
