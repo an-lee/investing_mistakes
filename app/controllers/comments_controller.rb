@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
   before_action :load_post
 
+  def new
+  end
+
   def create
     @comment = @post.comments.create!(comment_params.merge(commenter: current_user))
   end

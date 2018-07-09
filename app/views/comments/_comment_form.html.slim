@@ -1,0 +1,4 @@
+= bootstrap_form_for Comment.new, url: post_comments_path(post), remote: true do |f|
+  = f.text_area :content, hide_label: true
+  .comment-form-submit
+    = f.submit '评论', class: 'btn btn-sm btn-primary'

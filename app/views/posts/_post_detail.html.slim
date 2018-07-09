@@ -22,11 +22,7 @@
 
   .card-footer.post-footer
     .comment-form
-      = bootstrap_form_for Comment.new, url: post_comments_path(post), remote: true do |f|
-        = f.text_area :content, hide_label: true
-        .comment-form-submit
-          = f.submit '评论', class: 'btn btn-sm btn-primary'
-      end
+      = render 'comments/comment_form', post: post
     .comment-list
       - post.comments.order_desc.each do |comment|
         = render 'comments/comment_card', comment: comment
