@@ -31,5 +31,5 @@ class Comment < ApplicationRecord
 
   has_ancestry
 
-  scope :order_desc, -> { order(created_at: :desc) }
+  scope :order_asc, -> { order(created_at: :asc) }
 end

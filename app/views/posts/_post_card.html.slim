@@ -24,7 +24,7 @@
     .comment-form
       = link_to '评论', post_path(post)
     .comment-list
-      - post.comments.order_desc.limit(5).each do |comment|
+      - post.comments.order_asc.limit(5).each do |comment|
         = render 'comments/comment_card', comment: comment
       - if post.comments.count > 5
         .comment-more

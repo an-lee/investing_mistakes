@@ -24,5 +24,5 @@
     .comment-form
       = render 'comments/comment_form', post: post
     .comment-list
-      - post.comments.order_desc.each do |comment|
+      - post.comments.order_asc.each do |comment|
         = render 'comments/comment_card', comment: comment
