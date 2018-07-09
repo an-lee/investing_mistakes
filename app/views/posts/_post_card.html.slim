@@ -14,15 +14,18 @@
     .card-title 结果...
     .card-text = post.result
     .post-action
-      = link_to new_post_payment_path(post), remote: true, class: 'btn btn-sm btn-outline-danger pay-btn' do
-        | 鼓励一下
+      - if current_user
+        = link_to '鼓励一下', new_post_payment_path(post), remote: true, class: 'btn btn-sm btn-outline-danger pay-btn'
+      - else
+        = link_to '鼓励一下', login_path, class: 'btn btn-sm btn-outline-danger pay-btn'
     .post-payers
       - post.payers.limit(20).each do |payer|
         = image_tag display_avatar_url(payer)
 
   .card-footer.post-footer
     .comment-form
-      = link_to '评论', post_path(post)
+      - if current_user
+        = link_to '评论', post_path(post)
     .comment-list
       - post.comments.order_asc.limit(5).each do |comment|
         = render 'comments/comment_card', comment: comment

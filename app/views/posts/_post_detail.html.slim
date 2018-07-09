@@ -21,8 +21,9 @@
         = image_tag display_avatar_url(payer)
 
   .card-footer.post-footer
-    .comment-form
-      = render 'comments/comment_form', post: post
+    - if current_user
+      .comment-form
+        = render 'comments/comment_form', post: post
     .comment-list
       - post.comments.order_asc.each do |comment|
         = render 'comments/comment_card', comment: comment
