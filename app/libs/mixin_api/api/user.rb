@@ -26,7 +26,7 @@ module MixinAPI
         body = user_ids.to_json
         access_token ||= MixinAPI.api_auth.access_token('POST', '/users/fetch', body)
         authorization = format('Bearer %s', access_token)
-        client.post('users/fetch', headers: { 'Authorization': authorization })
+        client.post('users/fetch', headers: { 'Authorization': authorization }, json: user_ids)
       end
     end
   end

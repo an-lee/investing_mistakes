@@ -1,6 +1,6 @@
 module MixinAPI
   def self.api_me
-    @api_user ||= MixinAPI::API::Me.new
+    @api_me ||= MixinAPI::API::Me.new
   end
 
   def self.api_user

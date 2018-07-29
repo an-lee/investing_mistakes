@@ -23,6 +23,7 @@ module MixinAPI
 
       def encrypted_pin
         aes_key = Base64.encode64 JOSE::JWA::PKCS1::rsaes_oaep_decrypt('SHA256', pin_token, private_key, session_id)
+        aes_key = aes_key.gsub( /\n\z/, '' )
         ts = Time.now.utc.to_i
         tszero = ts % 0x100
         tsone = (ts % 0x10000) >> 8
@@ -50,7 +51,7 @@ module MixinAPI
         msg = iv + cipher64
 
         encoded = Base64.encode64 msg
-        # encoded.gsub( /\n\z/, '' )
+        encoded.gsub( /\n\z/, '' )
       end
     end
   end
