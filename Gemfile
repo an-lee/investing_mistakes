@@ -16,6 +16,10 @@ gem 'pg', '0.18'
 gem 'figaro'
 gem 'lograge'
 
+# Authorization
+gem 'jwt'
+gem 'jose'
+
 # View
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

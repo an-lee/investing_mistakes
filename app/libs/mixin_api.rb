@@ -6,4 +6,8 @@ module MixinAPI
   def self.api_payment
     @api_payment ||= MixinAPI::API::Payment.new
   end
+
+  def self.api_auth
+    @api_payment ||= MixinAPI::API::Auth.new
+  end
 end
