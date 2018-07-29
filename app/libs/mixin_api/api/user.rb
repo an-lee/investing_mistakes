@@ -7,16 +7,26 @@ module MixinAPI
         @client = Client.new
       end
 
-      def read_profile(access_token=nil)
-        access_token ||= MixinAPI.api_auth.access_token('GET', '/me', '')
+      def read(user_id, access_token=nil)
+        # user_id: Mixin User Id
+        access_token ||= MixinAPI.api_auth.access_token('GET', format('/users/%s', user_id), '')
         authorization = format('Bearer %s', access_token)
-        client.get('me', headers: { 'Authorization': authorization })
+        client.get(format('users/%s', user_id), headers: { 'Authorization': authorization })
       end
 
-      def read_assets(access_token=nil)
-        access_token ||= MixinAPI.api_auth.access_token('GET', '/assets', '')
+      def search(q, access_token=nil)
+        # q: Mixin Id or Phone Number
+        access_token ||= MixinAPI.api_auth.access_token('GET', format('/search/%s', q), '')
         authorization = format('Bearer %s', access_token)
-        client.get('assets', headers: { 'Authorization': authorization })
+        client.get(format('search/%s', q), headers: { 'Authorization': authorization })
+      end
+
+      def fetch(user_ids, access_token=nil)
+        user_ids = [user_ids] if user_ids.is_a? String
+        body = user_ids.to_json
+        access_token ||= MixinAPI.api_auth.access_token('POST', '/users/fetch', body)
+        authorization = format('Bearer %s', access_token)
+        client.post('users/fetch', headers: { 'Authorization': authorization })
       end
     end
   end
