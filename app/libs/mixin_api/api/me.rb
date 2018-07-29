@@ -8,25 +8,42 @@ module MixinAPI
       end
 
       def read_profile(access_token=nil)
-        access_token ||= MixinAPI.api_auth.access_token('GET', '/me', '')
+        path = '/me'
+        access_token ||= MixinAPI.api_auth.access_token('GET', path, '')
         authorization = format('Bearer %s', access_token)
-        client.get('me', headers: { 'Authorization': authorization })
+        client.get(path, headers: { 'Authorization': authorization })
       end
 
       def update_profile(full_name, avatar_base64, access_token=nil)
-        body = {
+        path = '/me'
+        payload = {
           "full_name": full_name,
           "avatar_base64": avatar_base64
-        }.to_json
-        access_token ||= MixinAPI.api_auth.access_token('POST', '/me', body)
+        }
+        access_token ||= MixinAPI.api_auth.access_token('POST', path, payload.to_json)
         authorization = format('Bearer %s', access_token)
-        client.post('me', headers: { 'Authorization': authorization })
+        client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end
 
       def read_assets(access_token=nil)
-        access_token ||= MixinAPI.api_auth.access_token('GET', '/assets', '')
+        path = '/assets'
+        access_token ||= MixinAPI.api_auth.access_token('GET', path, '')
         authorization = format('Bearer %s', access_token)
-        client.get('assets', headers: { 'Authorization': authorization })
+        client.get(path, headers: { 'Authorization': authorization })
+      end
+
+      def read_asset(asset_id, access_token=nil)
+        path = format('/assets/%s', asset_id)
+        access_token ||= MixinAPI.api_auth.access_token('GET', path, '')
+        authorization = format('Bearer %s', access_token)
+        client.get(path, headers: { 'Authorization': authorization })
+      end
+
+      def read_friends(access_token=nil)
+        path = '/friends'
+        access_token ||= MixinAPI.api_auth.access_token('GET', path, '')
+        authorization = format('Bearer %s', access_token)
+        client.get(path, headers: { 'Authorization': authorization })
       end
     end
   end

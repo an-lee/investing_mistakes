@@ -11,6 +11,10 @@ module MixinAPI
     @api_payment ||= MixinAPI::API::Payment.new
   end
 
+  def self.api_transfer
+    @api_transfer ||= MixinAPI::API::Transfer.new
+  end
+
   def self.api_auth
     @api_auth ||= MixinAPI::API::Auth.new(
       client_id: Figaro.env.MIXIN_CLIENT_ID,
