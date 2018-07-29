@@ -1,36 +1,43 @@
 module MixinAPI
   module API
     class Auth
+      attr_reader :client_id, :client_secret, :session_id, :pin_code, :pin_token, :private_key
       attr_reader :client
 
-      def initialize
+      def initialize(options)
+        @client_id = options[:client_id]
+        @client_secret = options[:client_secret]
+        @session_id = options[:session_id]
+        @pin_code = options[:pin_code]
+        @pin_token = Base64.decode64 options[:pin_token]
+        @private_key = OpenSSL::PKey::RSA.new options[:private_key]
         @client = Client.new
       end
 
-      def access_token
-        hmac_secret = Figaro.env.MIXIN_PRIVATE_KEY
-        iat = Time.now.utc
-        epx = Time.now.utc + 200.seconds
-        jti_raw = [hmac_secret, iat].join(':').to_s
-        jti = Digest::MD5.hexdigest(jti_raw)
+      def access_token(method, uri, body)
+        sig = Digest::SHA256.hexdigest (method + uri + body)
+        iat = Time.now.utc.to_i
+        exp = (Time.now.utc + 200.seconds).to_i
+        jti = SecureRandom.uuid
         payload = {
-          'uid': Figaro.env.MIXIN_CLIENT_ID,
-          'sid': Figaro.env.MIXIN_SESSION_ID,
+          'uid': client_id,
+          'sid': session_id,
           'iat': iat,
           'exp': exp,
-          'jit': jit,
-          'sig': jwtSig
+          'jti': jti,
+          'sig': sig
         }
+        JWT.encode payload, private_key, 'RS512'
       end
 
       def encrypted_pin
-        ts = Time.now.to_i
+        ts = Time.now.utc.to_i
         tszero = ts % 0x100
         tsone = (ts % 0x10000) >> 8
         tstwo = (ts % 0x1000000) >> 16
         tsthree = (ts % 0x100000000) >> 24
         tsstring = tszero.chr + tsone.chr + tstwo.chr + tsthree.chr + '\0\0\0\0'
-        toEncryptContent = Figaro.env.MIXIN_PIN_CODE + tsstring + tsstring
+        toEncryptContent = pin_code + tsstring + tsstring
         lenOfToEncryptContent = toEncryptContent.length
         toPadCount = 16 - lenOfToEncryptContent % 16
         if toPadCount > 0
@@ -56,12 +63,7 @@ module MixinAPI
       private
 
       def _aes_key
-        session_id = Figaro.env.MIXIN_SESSION_ID
-        pin_token_64 = Figaro.env.MIXIN_PIN_TOKEN
-        pin_token = Base64.decode64 pin_token_64
-        private_key = OpenSSL::PKey::RSA.new Figaro.env.MIXIN_PRIVATE_KEY
         decrypted_string = JOSE::JWA::PKCS1::rsaes_oaep_decrypt('SHA256', pin_token, private_key, session_id)
-
         Base64.encode64 decrypted_string
       end
     end

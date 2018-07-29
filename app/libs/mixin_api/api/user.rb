@@ -7,16 +7,16 @@ module MixinAPI
         @client = Client.new
       end
 
-      def read_profile(access_token)
-        path = 'me'
+      def read_profile(access_token=nil)
+        access_token ||= MixinAPI.api_auth.access_token('GET', '/me', '')
         authorization = format('Bearer %s', access_token)
-        client.get(path, headers: { 'Authorization': authorization })
+        client.get('me', headers: { 'Authorization': authorization })
       end
 
-      def read_assets(access_token)
-        path = 'assets'
+      def read_assets(access_token=nil)
+        access_token ||= MixinAPI.api_auth.access_token('GET', '/assets', '')
         authorization = format('Bearer %s', access_token)
-        client.get(path, headers: { 'Authorization': authorization })
+        client.get('assets', headers: { 'Authorization': authorization })
       end
     end
   end
