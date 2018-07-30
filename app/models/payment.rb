@@ -63,7 +63,7 @@ class Payment < ApplicationRecord
       transitions from: :processing, to: :paid
     end
 
-    event :transfer, after: [:touch_transferred_at, :confirm_and_complete] do
+    event :transfer, after: :touch_transferred_at do
       transitions from: :paid, to: :transferred
     end
 
@@ -92,18 +92,8 @@ class Payment < ApplicationRecord
       trace_id: transfer_trace,
       memo: transfer_memo
     })
-    raise 'transfer failed' unless r['error'].nil?
 
-    transfer!
-  end
-
-  def confirm_and_complete
-    r = MixinBot.api_transfer.read(transfer_trace)
-    raise 'can not read transfer in mixin network' if r['error'].present?
-
-    if r['data']['amount'] == amount && r['data']['opponent_id'] == recipient.uid
-      complete!
-    end
+    transfer! && complete! if r['data']['trace_id'] == transfer_trace
   end
 
   def touch_processing_started_at
