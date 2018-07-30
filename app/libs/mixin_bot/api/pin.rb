@@ -1,4 +1,4 @@
-module MixinAPI
+module MixinBot
   module API
     class Pin
       attr_reader :session_id, :pin_code, :pin_token, :private_key
@@ -18,7 +18,7 @@ module MixinAPI
           pin: encrypted_pin
         }
 
-        access_token ||= MixinAPI.api_auth.access_token('POST', path, payload.to_json)
+        access_token ||= MixinBot.api_auth.access_token('POST', path, payload.to_json)
         authorization = format('Bearer %s', access_token)
         client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end

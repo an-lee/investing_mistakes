@@ -1,4 +1,4 @@
-module MixinAPI
+module MixinBot
   module Errors
     # 通用异常
     Error = Class.new(StandardError)

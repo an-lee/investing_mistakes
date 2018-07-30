@@ -1,4 +1,4 @@
-module MixinAPI
+module MixinBot
   class Client
     SERVER_SCHEME = 'https'.freeze
     SERVER_HOST = 'api.mixin.one'.freeze

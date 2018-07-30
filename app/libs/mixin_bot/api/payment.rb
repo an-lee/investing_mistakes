@@ -1,4 +1,4 @@
-module MixinAPI
+module MixinBot
   module API
     class Payment
       attr_reader :client

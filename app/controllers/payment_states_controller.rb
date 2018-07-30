@@ -4,8 +4,8 @@ class PaymentStatesController < ApplicationController
   def show
     return if @payment.blank?
 
-    r = MixinAPI::api_payment.verify(@payment)
-    
+    r = MixinBot.api_payment.verify(@payment)
+
     if r['data'].fetch('status') == 'paid'
       @payment.complete!
       render plain: 'paid'

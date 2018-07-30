@@ -1,4 +1,4 @@
-module MixinAPI
+module MixinBot
   module API
     class User
       attr_reader :client
@@ -10,7 +10,7 @@ module MixinAPI
       def read(user_id, access_token=nil)
         # user_id: Mixin User Id
         path = format('/users/%s', user_id)
-        access_token ||= MixinAPI.api_auth.access_token('GET', path, '')
+        access_token ||= MixinBot.api_auth.access_token('GET', path, '')
         authorization = format('Bearer %s', access_token)
         client.get(path, headers: { 'Authorization': authorization })
       end
@@ -18,9 +18,9 @@ module MixinAPI
       def search(q, access_token=nil)
         # q: Mixin Id or Phone Number
         path = format('/search/%s', q)
-        access_token ||= MixinAPI.api_auth.access_token('GET', format(path, q), '')
+        access_token ||= MixinBot.api_auth.access_token('GET', path, '')
         authorization = format('Bearer %s', access_token)
-        client.get(format(path, q), headers: { 'Authorization': authorization })
+        client.get(path, headers: { 'Authorization': authorization })
       end
 
       def fetch(user_ids, access_token=nil)
@@ -28,7 +28,7 @@ module MixinAPI
         path = '/users/fetch'
         user_ids = [user_ids] if user_ids.is_a? String
         payload = user_ids
-        access_token ||= MixinAPI.api_auth.access_token('POST', path, payload.to_json)
+        access_token ||= MixinBot.api_auth.access_token('POST', path, payload.to_json)
         authorization = format('Bearer %s', access_token)
         client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end

@@ -1,4 +1,4 @@
-module MixinAPI
+module MixinBot
   module API
     class Auth
       attr_reader :client_id, :client_secret, :session_id, :pin_code, :pin_token, :private_key
@@ -11,6 +11,7 @@ module MixinAPI
         @pin_code = options[:pin_code]
         @pin_token = Base64.decode64 options[:pin_token]
         @private_key = OpenSSL::PKey::RSA.new options[:private_key]
+        @client = Client.new
       end
 
       def access_token(method, uri, body)
@@ -27,6 +28,17 @@ module MixinAPI
           'sig': sig
         }
         JWT.encode payload, private_key, 'RS512'
+      end
+
+      def oauth_token(code)
+        path = 'oauth/token'
+        payload = {
+          client_id: client_id,
+          client_secret: client_secret,
+          code: code
+        }
+        r = client.post(path, json: payload)
+        return r['data']['access_token']
       end
     end
   end

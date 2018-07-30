@@ -3,9 +3,9 @@ module Authenticatable
 
   class_methods do
     def auth_from_mixin(code)
-      access_token = MixinTokenManager.access_token(code)
-      profile = MixinAPI.api_user.read_profile(access_token).fetch('data', nil)
-      assets = MixinAPI.api_user.read_assets(access_token).fetch('data', nil)
+      access_token = MixinBot.api_auth.oauth_token(code)
+      profile = MixinBot.api_user.read_profile(access_token).fetch('data', nil)
+      assets = MixinBot.api_user.read_assets(access_token).fetch('data', nil)
 
       raise 'No user profile found!' unless profile.present?
 
