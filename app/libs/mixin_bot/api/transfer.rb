@@ -7,7 +7,7 @@ module MixinBot
         @client = Client.new
       end
 
-      def create(options)
+      def create(pin, options)
         # data for test:
         # asset_id = '965e5c6e-434c-3fa9-b780-c50f43cd955c'
         # opponent_id = '7ed9292d-7c95-4333-aa48-a8c640064186'
@@ -20,9 +20,9 @@ module MixinBot
         asset_id = options.fetch('asset_id')
         opponent_id = options.fetch('opponent_id')
         amount = options.fetch('amount')
-        pin = options.fetch('pin')
         memo = options.fetch('memo')
-        trace_id = SecureRandom.uuid
+        trace_id = options.fetch('trace_id')
+        trace_id ||= SecureRandom.uuid
 
         path = '/transfers'
         payload = {

@@ -18,4 +18,16 @@ module Tracable
       end
     end
   end
+
+  def setup_transfer_trace
+    if self.transfer_trace.nil?
+      loop do
+        candidate = SecureRandom.uuid
+        unless self.class.exists?(transfer_trace: candidate)
+          self.transfer_trace = candidate
+          break
+        end
+      end
+    end
+  end
 end

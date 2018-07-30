@@ -15,13 +15,17 @@
 #  completed_at(支付完成时间)          :datetime
 #  created_at                          :datetime         not null
 #  updated_at                          :datetime         not null
+#  transfer_trace(转账trace)           :string
+#  paid_at(付款时间)                   :datetime
+#  transferred_at(转账时间)            :datetime
 #
 # Indexes
 #
-#  index_payments_on_payer_id      (payer_id)
-#  index_payments_on_post_id       (post_id)
-#  index_payments_on_recipient_id  (recipient_id)
-#  index_payments_on_trace         (trace) UNIQUE
+#  index_payments_on_payer_id        (payer_id)
+#  index_payments_on_post_id         (post_id)
+#  index_payments_on_recipient_id    (recipient_id)
+#  index_payments_on_trace           (trace) UNIQUE
+#  index_payments_on_transfer_trace  (transfer_trace) UNIQUE
 #
 # Foreign Keys
 #

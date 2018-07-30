@@ -1,14 +1,13 @@
 module MixinBot
   module API
     class Auth
-      attr_reader :client_id, :client_secret, :session_id, :pin_code, :pin_token, :private_key
+      attr_reader :client_id, :client_secret, :session_id, :pin_token, :private_key
       attr_reader :client
 
       def initialize(options)
         @client_id = options[:client_id]
         @client_secret = options[:client_secret]
         @session_id = options[:session_id]
-        @pin_code = options[:pin_code]
         @pin_token = Base64.decode64 options[:pin_token]
         @private_key = OpenSSL::PKey::RSA.new options[:private_key]
         @client = Client.new

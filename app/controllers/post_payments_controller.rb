@@ -5,7 +5,7 @@ class PostPaymentsController < ApplicationController
     @payment = @post.receivables.new(
       asset_id: Post::AVAILABLE_PAYMENT.fetch(:asset_id),
       recipient: @post.author,
-      amount: 100
+      amount: 666
     )
     @payment.setup_trace
   end
@@ -17,12 +17,12 @@ class PostPaymentsController < ApplicationController
     @payment.payer = current_user
 
     if @payment.save
-      @path = CreateMixinPaymentPathService.new.call(
-        recipient: @payment.recipient.uid,
-        asset: @payment.asset_id,
+      @path = MixinBot.api_payment.request_url(
+        recipient_id: Figaro.env.MIXIN_CLIENT_ID,
+        asset_id: @payment.asset_id,
         amount: @payment.amount,
         trace: @payment.trace,
-        memo: @payment.memo,
+        memo: @payment.memo
       )
       @payment.started_processing_payment!
 

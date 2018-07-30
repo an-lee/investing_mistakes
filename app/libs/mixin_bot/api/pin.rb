@@ -6,7 +6,6 @@ module MixinBot
 
       def initialize(options)
         @session_id = options[:session_id]
-        @pin_code = options[:pin_code]
         @pin_token = Base64.decode64 options[:pin_token]
         @private_key = OpenSSL::PKey::RSA.new options[:private_key]
         @client = Client.new
@@ -23,7 +22,7 @@ module MixinBot
         client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end
 
-      def decrypted_pin(msg)
+      def decrypt(msg)
         msg = Base64.strict_decode64 msg
         iv = msg[0..15]
         cipher = msg[16..47]
@@ -37,7 +36,7 @@ module MixinBot
         return plain
       end
 
-      def encrypted_pin
+      def encrypt(pin_code)
         aes_key = JOSE::JWA::PKCS1::rsaes_oaep_decrypt('SHA256', pin_token, private_key, session_id)
         ts = Time.now.utc.to_i
         tszero = ts % 0x100

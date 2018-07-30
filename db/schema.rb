@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_08_211511) do
+ActiveRecord::Schema.define(version: 2018_07_30_122335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,10 +83,14 @@ ActiveRecord::Schema.define(version: 2018_07_08_211511) do
     t.datetime "completed_at", comment: "支付完成时间"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "transfer_trace", comment: "转账trace"
+    t.datetime "paid_at", comment: "付款时间"
+    t.datetime "transferred_at", comment: "转账时间"
     t.index ["payer_id"], name: "index_payments_on_payer_id"
     t.index ["post_id"], name: "index_payments_on_post_id"
     t.index ["recipient_id"], name: "index_payments_on_recipient_id"
     t.index ["trace"], name: "index_payments_on_trace", unique: true
+    t.index ["transfer_trace"], name: "index_payments_on_transfer_trace", unique: true
   end
 
   create_table "posts", comment: "帖子", force: :cascade do |t|
