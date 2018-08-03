@@ -15,6 +15,16 @@ module MixinBot
     @api_transfer ||= MixinBot::API::Transfer.new
   end
 
+  def self.api_conversation
+    @api_conversation ||= MixinBot::API::Conversation.new(
+      client_id: Figaro.env.MIXIN_CLIENT_ID,
+    )
+  end
+
+  def self.api_message
+    @api_message ||= MixinBot::API::Message.new
+  end
+
   def self.api_auth
     @api_auth ||= MixinBot::API::Auth.new(
       client_id: Figaro.env.MIXIN_CLIENT_ID,

@@ -45,6 +45,5 @@ EM.run {
   ws.on :close do |event|
     p [:close, event.code, event.reason]
     ws = nil
-    EM.stop
   end
 }
