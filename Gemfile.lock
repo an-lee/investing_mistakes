@@ -193,6 +193,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    mixin_bot (0.0.1.1)
     msgpack (1.2.4)
     multi_json (1.13.1)
     netrc (0.11.0)
@@ -375,6 +376,7 @@ DEPENDENCIES
   mina-multistage (~> 1.0.3)
   mina-puma (~> 1.1.0)
   mina-sidekiq (~> 1.0.3)
+  mixin_bot
   pg (= 0.18)
   puma (~> 3.11)
   rails (~> 5.2.0)

@@ -20,6 +20,9 @@ gem 'lograge'
 gem 'jwt'
 gem 'jose'
 
+# mixin
+gem 'mixin_bot'
+
 # View
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
