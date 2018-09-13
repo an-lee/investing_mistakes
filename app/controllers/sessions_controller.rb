@@ -8,11 +8,9 @@ class SessionsController < ApplicationController
       user_sign_in(user)
       redirect_to posts_path
     else
-      client_id = Figaro.env.MIXIN_CLIENT_ID
-      scope = Figaro.env.MIXIN_DEFAULT_SCOPE
       path = format('https://mixin.one/oauth/authorize?client_id=%s&scope=%s', client_id, scope)
 
-      redirect_to path
+      redirect_to MixinBot.api.request_oauth
     end
   end
 

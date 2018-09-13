@@ -1,16 +1,9 @@
 module MixinBot
-  module API
-    class Conversation
-      attr_reader :client
-
-      def initialize(options)
-        @client_id = options[:client_id]
-        @client = Client.new
-      end
-
-      def create()
+  class API
+    module Conversation
+      def create_conversation
         path = '/conversations'
-        access_token ||= MixinBot.api_auth.access_token('GET', path, '')
+        access_token ||= self.access_token('GET', path, '')
         params = {
           category: category,
           conversation_id: conversation_id,
@@ -24,7 +17,7 @@ module MixinBot
         }
       end
 
-      def unique_id(user_id)
+      def unique_conversation_id(user_id)
         md5 = Digest::MD5.new
         md5 << user_id
         md5 << client_id

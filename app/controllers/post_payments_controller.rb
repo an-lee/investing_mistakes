@@ -17,7 +17,7 @@ class PostPaymentsController < ApplicationController
     @payment.payer = current_user
 
     if @payment.save
-      @path = MixinBot.api_payment.request_url(
+      @path = MixinBot.api.pay_url(
         recipient_id: Figaro.env.MIXIN_CLIENT_ID,
         asset_id: @payment.asset_id,
         amount: @payment.amount,

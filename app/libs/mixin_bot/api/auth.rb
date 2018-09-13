@@ -1,18 +1,6 @@
 module MixinBot
-  module API
-    class Auth
-      attr_reader :client_id, :client_secret, :session_id, :pin_token, :private_key
-      attr_reader :client
-
-      def initialize(options)
-        @client_id = options[:client_id]
-        @client_secret = options[:client_secret]
-        @session_id = options[:session_id]
-        @pin_token = Base64.decode64 options[:pin_token]
-        @private_key = OpenSSL::PKey::RSA.new options[:private_key]
-        @client = Client.new
-      end
-
+  class API
+    module Auth
       def access_token(method, uri, body)
         sig = Digest::SHA256.hexdigest (method + uri + body)
         iat = Time.now.utc.to_i
@@ -37,7 +25,14 @@ module MixinBot
           code: code
         }
         r = client.post(path, json: payload)
+
+        raise r.inspect if r['error'].present?
+
         return r['data']['access_token']
+      end
+
+      def request_oauth
+        format('https://mixin.one/oauth/authorize?client_id=%s&scope=%s', client_id, scope)
       end
     end
   end

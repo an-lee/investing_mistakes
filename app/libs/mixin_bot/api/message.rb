@@ -1,13 +1,7 @@
 module MixinBot
-  module API
-    class Message
-      attr_reader :client
-
-      def initialize(options)
-        @client = Client.new
-      end
-
-      def read(data)
+  class API
+    module Message
+      def read_message(data)
         io = StringIO.new(data.pack('c*'), 'rb')
         gzip = Zlib::GzipReader.new io
         msg = gzip.read
@@ -15,7 +9,7 @@ module MixinBot
         return msg
       end
 
-      def write(action, params)
+      def write_message(action, params)
         msg = {
           "id": SecureRandom.uuid,
           "action":  action,

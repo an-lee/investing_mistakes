@@ -4,7 +4,7 @@ class PaymentStatesController < ApplicationController
   def show
     return if @payment.blank?
 
-    r = MixinBot.api_payment.verify({
+    r = MixinBot.api.verify_payment({
         recipient_id: Figaro.env.MIXIN_CLIENT_ID,
         asset_id: @payment.asset_id,
         amount: @payment.amount,
