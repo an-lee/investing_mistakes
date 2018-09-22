@@ -84,8 +84,8 @@ class Payment < ApplicationRecord
 
   def transfer_to_recipient!
     self.setup_transfer_trace
-    pin = MixinBot.api_pin.encrypt(Figaro.env.MIXIN_PIN_CODE)
-    r = MixinBot.api_transfer.create(pin, {
+    pin = MixinBot.api.encrypt_pin(Figaro.env.MIXIN_PIN_CODE)
+    r = MixinBot.api.create_transfer(pin, {
       asset_id: asset_id,
       opponent_id: recipient.uid,
       amount: amount,

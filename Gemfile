@@ -16,9 +16,8 @@ gem 'pg', '0.18'
 gem 'figaro'
 gem 'lograge'
 
-# Authorization
-gem 'jwt'
-gem 'jose'
+# mixin
+gem 'mixin_bot'
 
 # View
 gem 'sass-rails', '~> 5.0'
