@@ -8,7 +8,7 @@ Mixin ID: **7000101410**
 
 ## 简介
 
-一个 Rails 实现的 Mixin 机器人**玩具项目** : [投资错题本](https://mixin.one/codes/7e44f5da-a30c-47e4-9293-2501320127c5) 的源代码。
+一个 Rails 实现的 Mixin 机器人玩具项目 : [投资错题本](https://mixin.one/codes/7e44f5da-a30c-47e4-9293-2501320127c5) 的源代码。
 
 ## 初始化项目
 
@@ -75,7 +75,7 @@ token"=>"", "invitation_code"=>"", "code_id"=>"324677ec-0509-49df-8008-ed0d5a4c3
 ## 主要功能
 
 * Mixin 登录
-* 记录投资错误
+* 发帖
 * 评论
 * 打赏
 
@@ -95,7 +95,7 @@ token"=>"", "invitation_code"=>"", "code_id"=>"324677ec-0509-49df-8008-ed0d5a4c3
 
 ## 参考资料
 
-- [Mixin Nexwork 官方文档](https://developers.mixin.one/api)
+- [Mixin Network 官方文档](https://developers.mixin.one/api)
 - [MixinBot](https://github.com/an-lee/mixin_bot)
 
 ## License
