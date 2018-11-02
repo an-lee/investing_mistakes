@@ -27,7 +27,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
-gem 'bootstrap', '~> 4.1.0'
+gem 'bootstrap', '>= 4.1.2'
 gem 'simple_form', '~> 4.0.0'
 gem 'bootstrap_form'
 gem 'font-awesome-sass'
@@ -39,6 +39,7 @@ gem 'redis-namespace'
 gem 'sidekiq'
 gem 'kaminari', '~> 1.1.1'
 gem 'rails-i18n', '~> 5.0.3'
+gem 'rubyzip', '>=1.2.2'
 
 # Misc
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
